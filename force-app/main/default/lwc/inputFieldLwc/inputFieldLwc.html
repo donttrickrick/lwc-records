@@ -38,7 +38,7 @@
 
     <div if:true={isJSONObjectList} >
         <lightning-button variant="base" label="Edit Details" title="Edit Details" icon-name="utility:new_window" icon-position="right" onclick={handleClick} ></lightning-button>
-        <c-modal if:true={showPopup} do-popup={showPopup} onclose={handleCloseJSONObjectListEditModal} >
+        <!-- <c-modal if:true={showPopup} do-popup={showPopup} onclose={handleCloseJSONObjectListEditModal} >
             <c-new-record-list
                     class="input-modal"
                     slot="modalBody"
@@ -49,7 +49,7 @@
                     record-list={value}
                     createable
                     editable ></c-new-record-list>
-        </c-modal>
+        </c-modal> -->
 
         <c-new-record-list
                     class="input"

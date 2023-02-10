@@ -162,6 +162,20 @@ export default class CustomRecord extends LightningElement {
         this.dispatchEvent(new CustomEvent('blur', {
             detail : event.detail
         }));
+
+        let record = {};
+        this.errorMessages = [];
+        for(let oneFieldCmp of this.template.querySelectorAll('c-custom-field')) {
+            record[oneFieldCmp.fieldName] = oneFieldCmp.value;
+        }
+        if(this.validationRules && this.validationRules.length > 0) {
+            for(let oneRule of this.validationRules) {
+                let fail = this._calcFormula(oneRule.Template_Literal_Validation_Rule__c, ['record'], [record]) === 'true';
+                if(fail) {
+                    this.errorMessages.push(oneRule.Error_Message__c);
+                }
+            }
+        }
     }
 
     handleDependencyChange(event) {

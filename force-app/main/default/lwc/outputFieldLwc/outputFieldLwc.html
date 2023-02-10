@@ -66,11 +66,11 @@
         <lightning-layout multiple-rows >
             <template for:each={fileList} for:item="oneFile" >
                 <lightning-layout-item key={oneFile.path} padding="around-small" size="6" >
-                    <c-file-card file-name={oneFile.name}
+                    <!-- <c-file-card file-name={oneFile.name}
                                 file-type={oneFile.mime_type}
                                 storage-system={oneFile.storage}
                                 path={oneFile.path} >
-                    </c-file-card>
+                    </c-file-card> -->
                 </lightning-layout-item>
             </template>
         </lightning-layout>

@@ -1,0 +1,21 @@
+minimum_cumulusci_version: '3.70.0'
+project:
+    name: lwc-records
+    package:
+        name: lwc-records
+        api_version: '55.0'
+    git:
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/lwc-records/tests
+            options:
+                outputdir: robot/lwc-records/results
+
+    robot_testdoc:
+        options:
+            path: robot/lwc-records/tests
+            output: robot/lwc-records/doc/lwc-records_tests.html
+

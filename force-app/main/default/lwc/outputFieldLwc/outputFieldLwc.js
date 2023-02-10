@@ -132,6 +132,8 @@ export default class OutputFieldLwc extends LightningElement {
     }
 
     calcFormula(templateStr, keys, strs) {
+        debugger;
+
         keys.forEach((v, index) => {
             templateStr = templateStr.replaceAll( v, "t." + v);
         });
@@ -142,7 +144,10 @@ export default class OutputFieldLwc extends LightningElement {
             t[keys[index]] = v;
         });
  
-        let result = func(t);
+        let result;
+        try { 
+            result = func(t);
+        } catch(e) {}
         return result;
     }
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Review Date</label>
+    <protected>false</protected>
+    <values>
+        <field>Dependency_Order__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Dynamic_Apex_Picklist_Prefix__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Dynamic_Apex_Picklist__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Field_Name_Tree__c</field>
+        <value xsi:type="xsd:string">Fee_Value_Date__c</value>
+    </values>
+    <values>
+        <field>Field_Set_Name__c</field>
+        <value xsi:type="xsd:string">Fee: Detail;</value>
+    </values>
+    <values>
+        <field>Formula_Default_Value__c</field>
+        <value xsi:type="xsd:string">0</value>
+    </values>
+    <values>
+        <field>Is_Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Is_Dependency_Picklist__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Is_Readonly__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Is_Sparse__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Order__c</field>
+        <value xsi:type="xsd:double">907.0</value>
+    </values>
+    <values>
+        <field>Pattern__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Reference_Object__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Required__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Template_Literal_Formula__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:type="xsd:string">Date</value>
+    </values>
+</CustomMetadata>
