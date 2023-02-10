@@ -1,0 +1,71 @@
+<template>
+
+    <div if:true={isCardViewAndNotSparseUndefined} class="slds-grid " >
+        <div class={cardFieldStyle} title={value} >
+            <div class="slds-form-element__label">
+                <abbr if:true={isEditAndRequired} title="required" class="slds-required">*</abbr>
+                <span >{label}</span>
+            </div>
+            <div class="slds-form-element__control">
+                <c-input-field-lwc class="input" 
+                    if:true={isEditMode} 
+                    label={label} 
+                    type={type} 
+                    value={value} 
+                    required={required} 
+                    options={options}
+                    pattern={pattern} 
+                    field-name={fieldName}
+                    provided-currency-code={providedCurrencyCode} 
+                    provided-timezone={providedTimezone} 
+                    onblur={handleBlur} 
+                    onchange={handleChange} ></c-input-field-lwc>
+                
+                <span if:true={isViewMode} class="test-id__field-value slds-form-element__static slds-grow ">
+                    <c-output-field-lwc type={type} 
+                        value={value} 
+                        field-name={fieldName} 
+                        option-map={optionMap}
+                        template-literal-formula={templateLiteralFormula} 
+                        record={record}
+                        provided-currency-code={providedCurrencyCode} 
+                        provided-timezone={providedTimezone} 
+                        onedit={handleEdit} ></c-output-field-lwc>
+                </span>
+                <lightning-button-icon if:true={isRecordEditableAndViewMode} icon-name="utility:edit" class="input-icon" variant="bare" onclick={handleEdit} alternative-text="Edit" title="Edit" size="small" ></lightning-button-icon>
+            </div> 
+        </div>
+    </div>
+    
+    <div if:true={showTableView} class={tableFieldStyle} title={value} >
+        <div class={tableStyle} >
+            <c-input-field-lwc class="input" 
+                if:true={isEditMode} 
+                label={label} 
+                type={type} 
+                value={value} 
+                required={required} 
+                options={options} 
+                pattern={pattern} 
+                field-name={fieldName} 
+                provided-currency-code={providedCurrencyCode} 
+                provided-timezone={providedTimezone} 
+                onblur={handleBlur} 
+                onchange={handleChange} ></c-input-field-lwc>
+        </div>
+        <!-- <div class="error-message-placeholder" if:true={isTableInput} ></div> -->
+        <span if:true={isViewMode} >
+            <c-output-field-lwc type={type} 
+                            value={value} 
+                            field-name={fieldName} 
+                            option-map={optionMap}
+                            template-literal-formula={templateLiteralFormula}
+                            record={record}
+                            provided-currency-code={providedCurrencyCode} 
+                            provided-timezone={providedTimezone} 
+                            onedit={handleEdit} ></c-output-field-lwc>
+        </span>
+        <lightning-button-icon if:true={isRecordEditableAndViewMode} icon-name="utility:edit" class="input-icon" variant="bare" onclick={handleEdit} alternative-text="Edit" title="Edit" size="small" ></lightning-button-icon>
+    </div>
+
+</template>

@@ -1,0 +1,85 @@
+<template>
+    <div if:true={hasErrorMessage}  class="error-message" >
+        <template for:each={errorMessages} for:item="oneMessage">
+            <p key={oneMessage} >{oneMessage}</p>
+        </template>
+    </div>
+    <lightning-layout if:true={showCardView} class={cardRecordStyle} multiple-rows >
+        <template for:item="oneField" for:each={fields} >
+            <lightning-layout-item key={oneField.fieldPath} if:true={oneField.type} padding="horizontal-small" size={cardColumnSize} >
+                <c-custom-field mode={mode} 
+                            record-id={recordId}
+                            record={record}
+                            object-name={objectName}
+                            label={oneField.label}
+                            field-name={oneField.fieldPath}
+                            required={oneField.required}
+                            is-sparse={oneField.isSparse}
+                            record-editable={editable}
+                            field-readonly={oneField.isReadonly}
+                            type={oneField.type}
+                            value={oneField.value}
+                            options={oneField.options}
+                            option-map={oneField.optionMap}
+                            pattern={oneField.pattern}
+                            display-type={displayType}
+                            is-dependency-picklist={oneField.isDependencyPicklist}
+                            dependency-order={oneField.dependencyOrder}
+                            picklist-class-name={oneField.picklistClassName}
+                            template-literal-formula={oneField.templateLiteralFormula}
+                            provided-currency-code={providedCurrencyCode}
+                            provided-timezone={providedTimezone}
+                            onedit={handleEdit}
+                            onchange={handleChange}
+                            onblur={handleBlur}
+                            ondependencychange={handleDependencyChange}
+                            no-dirty-highlight={noDirtyHighlight} ></c-custom-field>
+            </lightning-layout-item>
+        </template>
+        
+    </lightning-layout>
+    <template if:true={showTableView}>
+        <table class="slds-table slds-table_bordered slds-table_col-bordered" role="grid" >
+            <tbody>
+                <tr class={tableRecordStyle} >
+                    <template for:item="oneField" for:each={fields} >
+                        <td key={oneField.fieldPath} class="slds-cell-edit" >
+                            <c-custom-field mode={mode} 
+                                        display-type={displayType}
+                                        record-id={recordId}
+                                        record={record}
+                                        object-name={objectName}
+                                        label={oneField.label}
+                                        field-name={oneField.fieldPath}
+                                        required={oneField.required}
+                                        is-sparse={oneField.isSparse}
+                                        record-editable={editable}
+                                        field-readonly={oneField.isReadonly}
+                                        type={oneField.type}
+                                        value={oneField.value}
+                                        options={oneField.options}
+                                        option-map={oneField.optionMap}
+                                        pattern={oneField.pattern}
+                                        template-literal-formula={oneField.templateLiteralFormula}
+                                        is-dependency-picklist={oneField.isDependencyPicklist}
+                                        dependency-order={oneField.dependencyOrder}
+                                        picklist-class-name={oneField.picklistClassName}
+                                        provided-currency-code={providedCurrencyCode}
+                                        provided-timezone={providedTimezone}
+                                        onedit={handleEdit}
+                                        onchange={handleChange}
+                                        onblur={handleBlur}
+                                        ondependencychange={handleDependencyChange}
+                                        no-dirty-highlight={noDirtyHighlight} ></c-custom-field>
+                        </td>
+                    </template>
+                    <td width="3%" >
+                        <div if:true={deletable} class="slds-align_absolute-center delete-record" >
+                            <lightning-icon icon-name="utility:delete" size="x-small" data-index={recordIndex} onclick={handleDelete} ></lightning-icon>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+</template>

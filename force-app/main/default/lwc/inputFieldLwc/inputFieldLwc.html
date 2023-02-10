@@ -1,0 +1,72 @@
+<template>
+    <!-- <lightning-input-field if:true={isSalesforceField} field-name={fieldName} value={value} >
+    </lightning-input-field>  -->
+    
+    <lightning-input class="input" variant="label-hidden" if:true={isString} pattern={pattern} required={required} value={value} label={fieldName} name={fieldName}  onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    <lightning-input class="input" variant="label-hidden" if:true={isDate} timezone={timezone} required={required} type="date" label={fieldName} name={fieldName} value={value} onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    <lightning-input class="input" variant="label-hidden" if:true={isDateTime} timezone={timezone} required={required} type="datetime" label={fieldName} name={fieldName} value={value} onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    <lightning-input class="input" variant="label-hidden" if:true={isDouble} type="number" label={fieldName} name={fieldName} step="0.000000001" message-when-step-mismatch="up to 9 digits" value={value} required={required} onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    <lightning-input class="input" variant="label-hidden" if:true={isInteger} type="number" label={fieldName} name={fieldName} step="1" value={value} required={required} onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    <div class="currency-field" if:true={isCurrency}>
+        <span class="currency-code" >{currencyCode}</span>
+        <lightning-input class="input" variant="label-hidden" type="number" label={currencyCode} name={fieldName} step="0.01" value={value} required={required} onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    </div>
+    <lightning-input class="input" variant="label-hidden" if:true={isPercent} type="number" label={fieldName} name={fieldName} step="0.01" value={value} formatter="percent-fixed" required={required} onblur={handleBlur} onchange={handleChange} ></lightning-input>
+    
+    <select if:true={isPicklist} 
+            class="slds-select input"
+            required={required}
+            onchange={handleChange} 
+            onblur={handleBlur}
+            disabled={isPicklistDisabled} >   
+        <option value="" selected={isPicklistValueNull} >Select Value</option>
+        <template for:each={options} for:item="oneOption" >
+            <option key={oneOption.value} selected={oneOption.selected} >{oneOption.label}</option>
+        </template>
+    </select>
+    <!-- <lightning-combobox class="input"
+            if:true={isPicklist}
+            variant="label-hidden"
+            name="name"
+            label="label"
+            value={value}
+            placeholder="Select Value"
+            options={options}
+            required={required}
+            onchange={handleChange} 
+            onblur={handleBlur} ></lightning-combobox> -->
+
+    <div if:true={isJSONObjectList} >
+        <lightning-button variant="base" label="Edit Details" title="Edit Details" icon-name="utility:new_window" icon-position="right" onclick={handleClick} ></lightning-button>
+        <c-modal if:true={showPopup} do-popup={showPopup} onclose={handleCloseJSONObjectListEditModal} >
+            <c-new-record-list
+                    class="input-modal"
+                    slot="modalBody"
+                    json-object-field-set-name="Opportunity: Product Notes" 
+                    card-column="one"
+                    display-type="card"
+                    title={label}
+                    record-list={value}
+                    createable
+                    editable ></c-new-record-list>
+        </c-modal>
+
+        <c-new-record-list
+                    class="input"
+                    json-object-field-set-name="Opportunity: Product Notes" 
+                    card-column="one"
+                    display-type="card"
+                    record-list={value}
+                    title=""  ></c-new-record-list>
+    </div>
+
+    <!-- <c-new-record-list if:true={isJSONObjectList} 
+                object-api-name="Lead"
+            json-object-field-set-name="Opportunity: Product Notes" 
+            card-column="one"
+            display-type="card"
+            title="456"
+            creatable
+            editable
+            deletable ></c-new-record-list> -->
+</template>

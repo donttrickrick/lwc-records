@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pattern__c</fullName>
+    <description>Regex. Because Crypto adopts different decimal fractions. We use String as the format and Regex to validate the decimal number.
+https://digi-trade.atlassian.net/browse/CRM-235</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Pattern</label>
+    <length>20</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

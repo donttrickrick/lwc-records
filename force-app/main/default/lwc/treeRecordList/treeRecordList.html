@@ -1,0 +1,62 @@
+<template>
+    <div if:true={hasRows} class={styleClassWrapper} >
+        <table class="slds-table slds-table_bordered slds-table_col-bordered slds-table_cell-buffer" role="grid" >
+            <thead >
+                <template for:each={columns} for:item="oneLevelColumn" for:index="levelIndex" >
+                    <tr key={oneLevelColumn.randomId} >
+                        <template for:each={oneLevelColumn.columns} for:item="headerItem" for:index="itemIndex" >
+                            <th key={headerItem.randomId} id={headerItem.randomId} data-type={headerItem.headerType} class={headerItem.styleClass} colspan={headerItem.colspan} rowspan={headerItem.rowspan} scope="col" >
+                                <div class={tableHeaderStyleClass} title={headerItem.label} >
+                                    
+                                    <lightning-icon if:true={headerItem.iconName} icon-name={headerItem.iconName} class="header-icon" size="x-small" ></lightning-icon>
+                                    {headerItem.label}
+                                    <lightning-helptext if:true={headerItem.tooltip} class="tooltip" content={headerItem.tooltip} ></lightning-helptext>
+                                </div>
+                            </th>
+                        </template>
+                    </tr>
+                </template>
+            </thead>
+
+            <tbody if:true={hasRows} >
+                <template for:each={rows} for:item="oneRow" >
+                    <tr key={oneRow.randomId} class={oneRow.styleClass} >
+                        <template for:each={oneRow.items} for:item="oneItem" >
+                            <template if:true={oneItem.isRowHeader} >
+                                <th key={oneItem.randomId} id={oneItem.randomId} data-type={oneItem.headerType} class={oneItem.styleClass} colspan={oneItem.colspan} rowspan={oneItem.rowspan} scope="col" >
+                                    <!-- <lightning-badge class="slds-theme_success" size="small" if:true={oneItem.isHighlightedRowHeaderItem} label={highlightedPrompt} ></lightning-badge> -->
+                                    <span >
+                                        <span class={tableHeaderStyleClass} title={oneItem.fieldTitle} >
+                                            <c-output-field-lwc type={oneItem.type} value={oneItem.fieldValue} ></c-output-field-lwc>
+                                        </span>
+                                        <template if:true={oneItem.tooltip} >
+                                            <lightning-helptext class="tooltip" content={oneItem.tooltip} ></lightning-helptext>
+                                        </template>
+                                        <span class="slds-badge slds-theme_success highlight-badge" if:true={oneItem.isHighlightedRowHeaderItem} >{highlightedPrompt}</span>
+                                    </span>
+                                </th>
+                            </template>
+                            <template if:false={oneItem.isRowHeader} >
+                                <td colspan={oneItem.colspan} key={oneItem.randomId} rowspan={oneItem.rowspan} class={oneItem.styleClass} role="gridcell" >
+                                    <span >
+                                        <span class={tableHeaderStyleClass} title={oneItem.fieldTitle} >
+                                            <template if:false={oneItem.isInputMode} >
+                                                <c-output-field-lwc type={oneItem.fieldType} value={oneItem.fieldValue} record-id={oneItem.recordId} record-type={oneItem.recordType} field-name={oneItem.fieldName} ></c-output-field-lwc>
+                                            </template>
+                                            <template if:true={oneItem.isInputMode} >
+                                                <c-input-field-lwc type={oneItem.fieldValue.type} value={oneItem.fieldValue} ></c-input-field-lwc>
+                                            </template>
+                                        </span>
+                                    </span>
+                                </td>
+                            </template>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+    <div if:false={hasRows} class="slds-align_absolute-center" >
+        No Data.
+    </div>
+</template>

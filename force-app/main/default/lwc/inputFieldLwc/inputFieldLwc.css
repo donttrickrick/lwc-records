@@ -1,0 +1,9 @@
+.currency-code {
+    margin: auto 5px auto 0px;
+}
+.currency-field {
+    display: flex;
+}
+.currency-field .input {
+    width: 100%;
+}

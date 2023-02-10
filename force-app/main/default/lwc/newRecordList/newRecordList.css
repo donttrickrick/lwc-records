@@ -1,0 +1,45 @@
+.card.slds-has-dividers_around-space .slds-item {
+    margin: 10px;
+    padding: 0;
+}
+.dirty {
+    /* background-color: rgb(250, 255, 189); */
+}
+.card {
+    padding-bottom: 1px;
+}
+.index {
+    position: absolute;
+    width: 0;
+    font-size: 2rem;
+    color: lightgrey;
+    font-weight: bold;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.slds-item {
+    position: relative;
+}
+.draggable {
+    cursor: move;
+    user-select: none;
+}
+.delete-record {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: rgb(221, 219, 218);
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+table {
+    table-layout: fixed;
+    word-break: break-all; 
+    word-wrap: break-word;
+}
+div.wrapper {
+    position: relative;
+}

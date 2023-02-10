@@ -1,0 +1,27 @@
+.dirty {
+    background-color: rgb(250, 255, 189);
+}
+.input {
+    z-index: 99999;
+}
+.error-message-placeholder { 
+    height: 3rem;
+}
+.table-input {
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.25rem; */
+}
+.table-cell { 
+    padding: .25rem .5rem;
+
+}
+.slds-truncate.table-cell {
+    overflow-x: scroll;
+    text-overflow: unset;
+}
+.slds-truncate.table-cell::-webkit-scrollbar {
+    height: 0px;
+    background: transparent;
+}

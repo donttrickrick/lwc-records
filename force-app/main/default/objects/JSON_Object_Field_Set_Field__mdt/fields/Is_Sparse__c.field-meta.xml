@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Sparse__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>https://digi-trade.atlassian.net/browse/CRM-350
+Sparse table can have no value. When the field is undefined, the field hides.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Is Sparse?</label>
+    <type>Checkbox</type>
+</CustomField>

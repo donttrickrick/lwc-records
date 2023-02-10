@@ -1,0 +1,166 @@
+<template>
+    <div if:true={hideList} >
+        {placeholder}
+    </div>
+    
+   <template if:false={hideList} > 
+        <lightning-card title={title} if:false={noCardWrapper} >
+            <slot name="titleSlot" slot="title"></slot> 
+            <slot name="underTitle" ></slot>
+
+            <lightning-spinner if:true={isLoading} alternative-text="loading" size="middle" variant="brand"></lightning-spinner>
+
+            <div slot="actions" if:true={showActions} >
+                <lightning-button-group >
+                    <lightning-button if:true={showNewButtons} label="New" onclick={handleNew} ></lightning-button>
+                    <lightning-button if:true={showCommitButtons} disabled={isViewMode} label="Cancel" variant="brand-outline" onclick={handleCancel} ></lightning-button>
+                    <lightning-button if:true={showCommitButtons} disabled={isViewMode} label="Save" variant="brand" onclick={handleSave} ></lightning-button>
+                </lightning-button-group>
+            </div>
+            <ul if:true={showCardView} ondragover={handleDragOver} ondrop={handleDrop} class="card slds-has-dividers_around-space" >
+                <template for:item="oneRecord" for:each={recordList} for:index="recordIndex"  >
+                    <li class={recordItemClass} key={oneRecord.recordId} draggable={isReady2Drag} 
+                        ondragstart={handleDragStart} 
+                        data-index={recordIndex} >
+                        <div if:true={oneRecord.deletable} >
+                            <div if:true={showDelete} class="delete-record"  >
+                                <lightning-icon icon-name="utility:close" size="small" data-index={recordIndex} variant="inverse" onclick={handleDelete} ></lightning-icon>
+                            </div>
+                        </div>
+                        <c-custom-record record-id={oneRecord.recordId}
+                                        fields={oneRecord.fields}
+                                        mode={oneRecord.mode}
+                                        onedit={handleEdit}
+                                        onchange={handleChange}
+                                        onblur={handleBlur}
+                                        editable={editable}
+                                        is-dirty={oneRecord.isDirty}
+                                        display-type={displayType}
+                                        card-column-size={cardColumnSize}
+                                        validation-rules={validationRules}
+                                        provided-currency-code={providedCurrencyCode}
+                                        provided-timezone={providedTimezone}
+                                        no-dirty-highlight={noDirtyHighlight} ></c-custom-record>
+                        <div if:true={showIndex} class="index slds-align_absolute-center" >{recordIndex}</div>
+                    </li>
+                </template>
+            </ul>
+
+            <div if:true={showTableView} >
+                
+                <table class="slds-table slds-table_bordered slds-table_col-bordered " role="grid" >
+                    <thead >
+                        <tr class="slds-line-height_reset">
+                            <template for:each={fieldSetDefinition} for:item="oneLevelColumn" for:index="levelIndex" >
+                                <th key={oneLevelColumn.fieldPath} class="slds-cell-wrap ">
+                                    {oneLevelColumn.label}
+                                </th>
+                            </template>
+                            <th width="3%" >
+                                <!--placeholder for delete-->
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                
+                <template for:item="oneRecord" for:each={recordList} for:index="recordIndex"  >
+                    <c-custom-record record-style={oneRecord.recordStyle} 
+                                    key={oneRecord.recordId}
+                                    data-index={recordIndex}
+                                    record-id={oneRecord.recordId}
+                                    fields={oneRecord.fields}
+                                    mode={oneRecord.mode}
+                                    onedit={handleEdit}
+                                    onchange={handleChange}
+                                    onblur={handleBlur}
+                                    editable={editable}
+                                    deletable={oneRecord.deletable}
+                                    show-delete={showDelete}
+                                    is-dirty={oneRecord.isDirty}
+                                    display-type={displayType}
+                                    card-column-size={cardColumnSize}
+                                    ondelete={handleDelete}
+                                    provided-currency-code={providedCurrencyCode}
+                                    provided-timezone={providedTimezone}
+                                    no-dirty-highlight={noDirtyHighlight} ></c-custom-record>
+                </template>
+            </div>
+        </lightning-card>
+
+        <div class="wrapper" if:true={noCardWrapper} >
+            <slot name="titleSlot" slot="title"></slot> 
+            <slot name="underTitle" ></slot>
+
+            <lightning-spinner if:true={isLoading} alternative-text="loading" size="middle" variant="brand"></lightning-spinner>
+
+            <ul if:true={showCardView} ondragover={handleDragOver} ondrop={handleDrop} class="card slds-has-dividers_around-space" >
+                <template for:item="oneRecord" for:each={recordList} for:index="recordIndex"  >
+                    <li class={recordItemClass} key={oneRecord.recordId} draggable={isReady2Drag} 
+                        ondragstart={handleDragStart} 
+                        data-index={recordIndex} >
+                        <div if:true={oneRecord.deletable} >
+                            <div if:true={showDelete} class="delete-record"  >
+                                <lightning-icon icon-name="utility:close" size="small" data-index={recordIndex} variant="inverse" onclick={handleDelete} ></lightning-icon>
+                            </div>
+                        </div>
+                        <c-custom-record record-id={oneRecord.recordId}
+                                        fields={oneRecord.fields}
+                                        mode={oneRecord.mode}
+                                        onedit={handleEdit}
+                                        onchange={handleChange}
+                                        onblur={handleBlur}
+                                        editable={editable}
+                                        is-dirty={oneRecord.isDirty}
+                                        display-type={displayType}
+                                        card-column-size={cardColumnSize}
+                                        validation-rules={validationRules}
+                                        provided-currency-code={providedCurrencyCode}
+                                        provided-timezone={providedTimezone}
+                                        no-dirty-highlight={noDirtyHighlight} ></c-custom-record>
+                        <div if:true={showIndex} class="index slds-align_absolute-center" >{recordIndex}</div>
+                    </li>
+                </template>
+            </ul>
+
+            <div if:true={showTableView} >
+                
+                <table class="slds-table slds-table_bordered slds-table_col-bordered " role="grid" >
+                    <thead >
+                        <tr class="slds-line-height_reset">
+                            <template for:each={fieldSetDefinition} for:item="oneLevelColumn" for:index="levelIndex" >
+                                <th key={oneLevelColumn.fieldPath} class="slds-cell-wrap ">
+                                    {oneLevelColumn.label}
+                                </th>
+                            </template>
+                            <th width="3%" >
+                                <!--placeholder for delete-->
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                
+                <template for:item="oneRecord" for:each={recordList} for:index="recordIndex"  >
+                    <c-custom-record record-style={oneRecord.recordStyle} 
+                                    key={oneRecord.recordId}
+                                    data-index={recordIndex}
+                                    record-id={oneRecord.recordId}
+                                    fields={oneRecord.fields}
+                                    mode={oneRecord.mode}
+                                    onedit={handleEdit}
+                                    onchange={handleChange}
+                                    onblur={handleBlur}
+                                    editable={editable}
+                                    deletable={oneRecord.deletable}
+                                    show-delete={showDelete}
+                                    is-dirty={oneRecord.isDirty}
+                                    display-type={displayType}
+                                    card-column-size={cardColumnSize}
+                                    ondelete={handleDelete}
+                                    provided-currency-code={providedCurrencyCode}
+                                    provided-timezone={providedTimezone}
+                                    no-dirty-highlight={noDirtyHighlight} ></c-custom-record>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>
